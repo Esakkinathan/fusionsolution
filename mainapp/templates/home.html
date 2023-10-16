@@ -1,0 +1,14 @@
+{%extends 'base.html' %}
+
+{% block content%}
+<h1>Welcome</h1>
+<br><br>
+{%if user.is_authenticated%}
+<a class="btn btn-danger text-light" href="{% url 'logout' %}">Logout</a>
+{%else%}
+<a class=" btn btn-primary text-light" href="{% url 'register' %}">Register</a>
+<br><br>
+<a class="btn btn-success text-light" href="{% url 'login' %}">Login</a>
+{%endif%}
+{% endblock %}
+
