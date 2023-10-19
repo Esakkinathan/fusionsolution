@@ -1,0 +1,33 @@
+
+{%extends 'base.html' %}
+
+{% block content%}
+<h1>Comment page</h1>
+
+    {% if user.is_authenticated %}
+            <form action="{% url 'comment_page' %}" method=POST >
+                {% csrf_token %}
+                <input type="text" name="commentname" id="commentName" class="form-control" placeholder="name" hidden >
+                <textarea name="commentbody" id="commentArea" class="form-control" placeholder="Add comment here" required ></textarea>
+                <br>
+                <center><input type="submit" id="cmtbtn" class="btn btn-outline-primary btn-sm"value="Submit"></center>
+                <script>
+                  var name = "{{user.id}}";
+                  document.getElementById("commentName").value=name;
+                </script>
+            </form>
+        </div>
+        <br>
+    {% endif %}
+    {% if not comments%}
+        <h3 >No comments yet</h3><br>
+    {% else %}
+        {% for comment in comments%}
+                    <p>{{comment.name.first_name}} {{comment.name.last_name}}<br>@{{comment.name.username}}</p>    
+
+                    <p>{{comment.body}} </p>                        
+                <p>{{comment.date_added}}</p>
+            <br><hr><br>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

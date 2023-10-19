@@ -3,12 +3,27 @@
 {% block content%}
 <h1>Welcome</h1>
 <br><br>
+
 {%if user.is_authenticated%}
 <a class="btn btn-danger text-light" href="{% url 'logout' %}">Logout</a>
+<a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit Settings</a>
+<a href="{% url 'comment_page' %}">Click to goto comment page</a>
 {%else%}
 <a class=" btn btn-primary text-light" href="{% url 'register' %}">Register</a>
 <br><br>
 <a class="btn btn-success text-light" href="{% url 'login' %}">Login</a>
 {%endif%}
+<center>
+{%for post in posts%}
+<div>
+{% if post.post_image.url%}
+<img src="{{post.post_image.url}}" alt="Post Image" width="500" height="500">
+{%endif%}
+<p>{{post.content}}</p>
+<p>{{post.date_added}}</p>
+</div>
+<br><hr><br>
+{%endfor%}
+</center>
 {% endblock %}
 
